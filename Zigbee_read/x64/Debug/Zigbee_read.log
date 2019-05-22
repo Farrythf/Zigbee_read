@@ -1,0 +1,3 @@
+﻿  Zigbee_read.cpp
+C:\Users\thf-m\OneDrive\Documents\vs_programme\Zigbee_read\Zigbee_read\Zigbee_read.cpp(63): warning C4566: character represented by universal-character-name '\uFF01' cannot be represented in the current code page (1252)
+  Zigbee_read.vcxproj -> C:\Users\thf-m\OneDrive\Documents\vs_programme\Zigbee_read\x64\Debug\Zigbee_read.exe

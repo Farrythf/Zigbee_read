@@ -8,6 +8,7 @@
 using namespace std;
 
 void Welcome_info();
+LPCWSTR stringToLPCWSTR(std::string orig);
 int main()
 {
 
@@ -16,6 +17,7 @@ int main()
 	string Port;
 	HANDLE Ser;
 	int iRet = 0;
+	cout << "\nscaning...\n";
 	for (int i = 1; i < 10; i++)
 	{
 		Port = "COM" + to_string(i);
@@ -58,8 +60,31 @@ int main()
 	}
 	else
 	{
-		cout << "Success！\n";
+		cout << "Success!\n";
 	}
+
+	SetupComm(Ser, 1024, 1024);
+
+	DCB dcb;
+	GetCommState(Ser, &dcb);
+	dcb.BaudRate = 9600; 
+	dcb.ByteSize = 8; 
+	dcb.Parity = NOPARITY; 
+	dcb.StopBits = TWOSTOPBITS; 
+	SetCommState(Ser, &dcb);
+
+	COMMTIMEOUTS TimeOuts; 
+	TimeOuts.ReadIntervalTimeout = MAXDWORD;
+	TimeOuts.ReadTotalTimeoutMultiplier = 0;
+	TimeOuts.ReadTotalTimeoutConstant = 0; 
+	TimeOuts.WriteTotalTimeoutMultiplier = 500;
+	TimeOuts.WriteTotalTimeoutConstant = 2000;
+	SetCommTimeouts(Ser, &TimeOuts); 
+
+	PurgeComm(Ser, PURGE_TXCLEAR | PURGE_RXCLEAR);
+
+	
+
 
 
 
